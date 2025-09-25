@@ -7,6 +7,8 @@ import adoptionsRouter from './routes/adoption.router.js';
 import sessionsRouter from './routes/sessions.router.js';
 import mocksRouter from './routes/mocks.router.js';
 import dotenv from 'dotenv';
+import swaggerUi from 'swagger-ui-express';
+import usersDocs from './docs/users.swagger.js';
 
 dotenv.config()
 
@@ -22,6 +24,7 @@ app.use('/api/pets',petsRouter);
 app.use('/api/adoptions',adoptionsRouter);
 app.use('/api/sessions',sessionsRouter);
 app.use('/api/mocks',mocksRouter);
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(usersDocs));
 
 app.listen(PORT, connection, () => {
     console.log(`Server online on port http://localhost:${PORT}`)

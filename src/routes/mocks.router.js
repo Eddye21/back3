@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { fakerES as fa } from '@faker-js/faker';
 import { generateMockUsers, generateMockPets } from '../utils/mocking.js';
 import { usersService, petsService } from '../services/index.js';
 
@@ -90,6 +91,17 @@ router.post('/generateData', async (req, res) => {
             error: 'Error interno del servidor al generar e insertar datos',
             timestamp: new Date().toISOString()
         });
+    }
+});
+
+
+router.get('/mockingusers', async (req, res) => {
+    try {
+        const users = await generateMockUsers(50);
+        const formatted = users.map(user => ({ _id: fa.database.mongodbObjectId(), ...user }));
+        res.json(formatted);
+    } catch (error) {
+        res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
     }
 });
 

@@ -9,7 +9,7 @@ export const generateMockUsers = async (count = 1) => {
             first_name:fa.person.firstName(),
             last_name:fa.person.lastName(),
             email:fa.internet.email(),
-            password: await bcrypt.hash(process.env.DEFAULT_PASSWORD || 'coder123', parseInt(process.env.BCRYPT_ROUNDS) || 10),
+            password: await bcrypt.hash('coder123', parseInt(process.env.BCRYPT_ROUNDS) || 10),
             role:fa.helpers.arrayElement(['user', 'admin']),
             pets: []
         };
